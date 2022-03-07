@@ -1,7 +1,8 @@
+from ctypes import cast
 import os
 from pathlib import Path
 from dotenv import load_dotenv, find_dotenv
-
+from dj_database_url import parse
 
 load_dotenv(find_dotenv())
 
@@ -75,11 +76,10 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 # Database
 
+default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
+
 DATABASES = {
-	'default': {
-		'ENGINE': 'django.db.backends.sqlite3',
-		'NAME': BASE_DIR / 'db.sqlite3',
-	}
+	'default': os.getenv('DATABASE_URL', default=default_dburl, cast=parse)
 }
 
 
@@ -122,6 +122,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 
 STATIC_URL = 'static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 
