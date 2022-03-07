@@ -1,4 +1,3 @@
-from ctypes import cast
 import os
 from pathlib import Path
 from dotenv import load_dotenv, find_dotenv
@@ -37,7 +36,7 @@ THIRD_PARTY_APPS = [
 ]
 
 PROJECT_APP = [
-	'Backend.api',
+	'api',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APP
@@ -58,7 +57,7 @@ CORS_ORIGIN_WHITELIST = (
 	'http://localhost:3000',
 )
 
-ROOT_URLCONF = 'Backend.core.urls'
+ROOT_URLCONF = 'core.urls'
 
 
 TEMPLATES = [
@@ -77,16 +76,10 @@ TEMPLATES = [
 	},
 ]
 
-WSGI_APPLICATION = 'Backend.core.wsgi.application'
+WSGI_APPLICATION = 'core.wsgi.application'
 
 
 # Database
-
-default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
-
-# DATABASES = {
-# 	'default': os.getenv('DATABASE_URL')
-# }
 
 DATABASES = {
 	'default': {
