@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import action
@@ -5,7 +6,7 @@ from rest_framework.filters import SearchFilter
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from .models import Movie, Rating
-from .serializers import MovieSerializer, RatingSerializer
+from .serializers import MovieSerializer, RatingSerializer, UserSerializer
 
 
 class MovieViewSet(ModelViewSet):
@@ -46,3 +47,8 @@ class RatingViewSet(ModelViewSet):
 	queryset = Rating.objects.all()
 	serializer_class = RatingSerializer
 	authentication_class = (TokenAuthentication, )
+
+
+class UserViewSet(ModelViewSet):
+	queryset = User.objects.all()
+	serializer_class = UserSerializer
