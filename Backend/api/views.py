@@ -3,6 +3,7 @@ from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import action
 from rest_framework.filters import SearchFilter
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from .models import Movie, Rating
@@ -15,6 +16,7 @@ class MovieViewSet(ModelViewSet):
 	filter_backends = (SearchFilter, )
 	search_fields = ['title']
 	authentication_classes = (TokenAuthentication, )
+	permission_classes = (AllowAny, )
 
 	@action(detail=True, methods=['POST'])
 	def rate_movie(self, request, pk=None):
@@ -47,8 +49,18 @@ class RatingViewSet(ModelViewSet):
 	queryset = Rating.objects.all()
 	serializer_class = RatingSerializer
 	authentication_class = (TokenAuthentication, )
+	permission_classes = (IsAuthenticated, )
+
+	def create(self, request, *args, **kwargs):
+		response = {'message': 'You cannot create rating directly!'}
+		return Response(response, status=status.HTTP_400_BAD_REQUEST)
+
+	def update(self, request, *args, **kwargs):
+		response = {'message': 'You cannot update rating directly!'}
+		return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
 
 class UserViewSet(ModelViewSet):
 	queryset = User.objects.all()
 	serializer_class = UserSerializer
+	permission_classes = (IsAdminUser, )

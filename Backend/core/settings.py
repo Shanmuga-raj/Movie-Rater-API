@@ -83,6 +83,14 @@ DATABASES = {
 }
 
 
+# Only Logged in user's can able to access (For all API's):
+REST_FRAMEWORK = {
+	'DEFAULT_PERMISSION_CLASSES': (
+		'rest_framework.permissions.IsAuthenticated',
+	)
+}
+
+
 # Password validation
 
 AUTH_PASSWORD_VALIDATORS = [
