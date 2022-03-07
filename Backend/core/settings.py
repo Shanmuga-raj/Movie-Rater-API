@@ -37,7 +37,7 @@ THIRD_PARTY_APPS = [
 ]
 
 PROJECT_APP = [
-	'api',
+	'Backend.api',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APP
@@ -58,7 +58,7 @@ CORS_ORIGIN_WHITELIST = (
 	'http://localhost:3000',
 )
 
-ROOT_URLCONF = 'core.urls'
+ROOT_URLCONF = 'Backend.core.urls'
 
 
 TEMPLATES = [
@@ -77,17 +77,23 @@ TEMPLATES = [
 	},
 ]
 
-WSGI_APPLICATION = 'core.wsgi.application'
+WSGI_APPLICATION = 'Backend.core.wsgi.application'
 
 
 # Database
 
 default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
 
-DATABASES = {
-	'default': os.getenv('DATABASE_URL', default=default_dburl, cast=parse)
-}
+# DATABASES = {
+# 	'default': os.getenv('DATABASE_URL')
+# }
 
+DATABASES = {
+	'default': {
+		'ENGINE': 'django.db.backends.sqlite3',
+		'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+	}
+}
 
 # Only Logged in user's can able to access (For all API's):
 REST_FRAMEWORK = {
