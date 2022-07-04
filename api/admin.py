@@ -7,7 +7,7 @@ class MovieAdmin(admin.ModelAdmin):
 	list_display = ('id', 'title', 'description')
 	list_filter = ('title', )
 	list_per_page = 10
-	readonly_fields = ('title', )
+#	readonly_fields = ('title', )
 	search_fields = ('title', )
 
 
