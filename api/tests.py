@@ -22,12 +22,12 @@ class MovieTestCase(TestCase):
 					"title": "Django unchanined", 
 					"description": "Django unchained is based on true story!.\
 					Raw, Suspensful, Hate speech."})
-		self.assertEqual(response.status_code, 201)
+		self.assertEqual(response.status_code, 401)
 
 	def test_edit_movie(self):
 		data = json.dumps({'title': 'Movie Title', 'description': 'Updated Movie Description'})
 		response = self.client.put('/api/movies/1/', data, content_type='application/json')
-		self.assertEqual(response.status_code, 200)
+		self.assertEqual(response.status_code, 401)
 
 
 class UserTestCase(TestCase):

@@ -16,14 +16,17 @@ class MovieViewSet(ModelViewSet):
 	filter_backends = (SearchFilter, )
 	search_fields = ['title']
 	authentication_classes = (TokenAuthentication, )
-	permission_classes = (AllowAny, )
+	permission_classes = (IsAuthenticated, )
 
 	@action(detail=True, methods=['POST'])
 	def rate_movie(self, request, pk=None):
 		if 'stars' in request.data:
 			movie = Movie.objects.get(id=pk)
+			print(movie)
 			stars = request.data['stars']
 			user = request.user
+			print(user)
+
 
 			try:
 				rating = Rating.objects.get(user=user.id, movie=movie.id)
@@ -63,4 +66,4 @@ class RatingViewSet(ModelViewSet):
 class UserViewSet(ModelViewSet):
 	queryset = User.objects.all()
 	serializer_class = UserSerializer
-	permission_classes = (IsAdminUser, )
+	permission_classes = (AllowAny, )
