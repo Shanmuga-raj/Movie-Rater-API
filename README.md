@@ -1,2 +1,6 @@
 # Movie-Rater
-Full Stack Web app using Django Rest Framework, React and React Native (Single Page)  Topics Resourc
+
+Using Django Rest Framework, Created a Simple [Movie Rater API](https://movie-rater-be.herokuapp.com/api/) 
+
+
+Have a Sneak Peek at my app -[💻](https://movie-rater-fe.web.app/)
